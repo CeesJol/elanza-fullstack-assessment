@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 
 const { guid } = require("./util");
 
+// Store care requests in-memory
 // One example care request
 let careRequests = [
   {

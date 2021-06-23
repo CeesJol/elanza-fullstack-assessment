@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/**
+ * Care request preview component.
+ * Shows a small preview of the care request on the home page.
+ */
 const RequestPreview = ({ careRequest }) => {
   return (
     <div className="request-preview">

@@ -4,6 +4,10 @@ import Home from "./Home";
 import New from "./New";
 import Request from "./Request";
 
+/**
+ * App component.
+ * Shows the navigation and implements the router.
+ */
 export default function App() {
   return (
     <Router>

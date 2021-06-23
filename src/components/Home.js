@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import RequestPreview from "./RequestPreview";
 
-const OpenRequests = () => {
+/**
+ * Home component.
+ * Shows an overview of all care requests.
+ */
+const Home = () => {
   const [careRequests, setCareRequests] = useState([]);
   const [status, setStatus] = useState("Loading care requests...");
   const fetchRequests = async () => {
@@ -36,4 +40,4 @@ const OpenRequests = () => {
   );
 };
 
-export default OpenRequests;
+export default Home;

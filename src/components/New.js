@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 
+/**
+ * New care request component.
+ * Allows client to post a new care request.
+ */
 const New = () => {
   const INITIAL_FIELDS = {
     kind: "Household",

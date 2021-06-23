@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+/**
+ * Care request component.
+ * Shows details of a care request.
+ * Dynamically routed based on a care request id.
+ */
 const Request = () => {
   const [careRequest, setCareRequest] = useState({});
   const { id } = useParams();
