@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 const Request = () => {
   const [careRequest, setCareRequest] = useState({});
-  const { id } = useParams(); // TODO i hope this is defined before the useEffect call...
+  const { id } = useParams();
   const [applyState, setApplyState] = useState("");
   const fetchRequest = async () => {
     // Fetch all request details using the ID
@@ -11,17 +11,11 @@ const Request = () => {
     const result = await response.json();
     setCareRequest(result.careRequest);
   };
-  const handleApply = async () => {
+  const handleApply = async (event) => {
+    event.preventDefault();
     setApplyState("LOADING");
-    const data = await fetch(`/api/apply/${id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({}),
-    });
-    const json = await data.json();
-    console.log("json:", json);
+    const response = await fetch(`/api/apply/${id}`);
+    const result = await response.json();
     setApplyState("SUCCESS");
   };
   useEffect(() => {

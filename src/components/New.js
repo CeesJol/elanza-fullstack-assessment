@@ -6,6 +6,7 @@ const New = () => {
   const [endDateTime, setEndDateTime] = useState("");
   const [clientName, setClientName] = useState("");
   const [extraInfo, setExtraInfo] = useState("");
+  const [status, setStatus] = useState("");
   const handleChangeKind = (event) => {
     setKind(event.target.value);
   };
@@ -43,8 +44,17 @@ const New = () => {
     const json = await data.json();
     console.log("json:", json);
 
-    // If success, clean up (clear form etc.)
-    // ...
+    // Clean up all input
+    setKind("household");
+    Array.from(document.querySelectorAll("input")).forEach(
+      (input) => (input.value = "")
+    );
+    Array.from(document.querySelectorAll("textarea")).forEach(
+      (input) => (input.value = "")
+    );
+
+    // Show success message
+    setStatus("Request posted successfully!");
   };
   return (
     <div>
@@ -102,6 +112,8 @@ const New = () => {
       </form>
 
       <button onClick={handleCreate}>Post request</button>
+
+      <p>{status}</p>
     </div>
   );
 };

@@ -7,32 +7,7 @@ const bodyParser = require("body-parser"); // Middleware for POST requests
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// TODO put this in util!
-// Create random ID
-// Used to create a unique link for each request
-// From: https://learnersbucket.com/examples/javascript/unique-id-generator-in-javascript/
-let guid = () => {
-  let s4 = () => {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  };
-  //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
-  return (
-    s4() +
-    s4() +
-    "-" +
-    s4() +
-    "-" +
-    s4() +
-    "-" +
-    s4() +
-    "-" +
-    s4() +
-    s4() +
-    s4()
-  );
-};
+const { guid } = require("./util");
 
 // TODO remove default request... that's just temporary
 let careRequests = [
@@ -48,13 +23,24 @@ let careRequests = [
 ];
 
 /**
- * Return the care requests. Return only the requests where status equals "OPEN".
+ * Return the care requests.
+ * Return only the requests where status equals "OPEN".
+ * Return only relevant information for each care request
+ *   to draw a preview for each care request.
  * Type: GET
  */
 app.get("/api/open-requests", function (req, res) {
-  // TODO dont return all details, just some important things for the overview page
+  // Filter to return only open care requests.
+  let result = careRequests.filter((careReq) => careReq.status === "OPEN");
+  // Return only relevant information to draw a preview for each care request.
+  result = careRequests.map((careReq) => {
+    const { clientName, id } = careReq;
+    console.log("clientName:", clientName);
+
+    return { clientName, id };
+  });
   return res.json({
-    careRequests: careRequests.filter((careReq) => careReq.status === "OPEN"),
+    careRequests: result,
   });
 });
 
@@ -97,10 +83,9 @@ app.post("/api/new", (req, res) => {
 
 /**
  * API that allows caregiver to apply to a request.
- * Type: POST
- * TODO could just be get...? Not sure
+ * Type: GET
  */
-app.post("/api/apply/:id", (req, res) => {
+app.get("/api/apply/:id", (req, res) => {
   console.log(req.body);
 
   // Find request and close it

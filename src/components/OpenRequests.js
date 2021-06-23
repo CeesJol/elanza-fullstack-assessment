@@ -11,7 +11,7 @@ const OpenRequests = () => {
   useEffect(() => {
     // Request open careRequests on load
     fetchRequests();
-  });
+  }, []);
   return (
     <div>
       <h2>Overview of Open Care Requests</h2>
