@@ -1,57 +1,38 @@
 import React, { useState } from "react";
 
 const New = () => {
-  const [kind, setKind] = useState("household");
-  const [startDateTime, setStartDateTime] = useState("");
-  const [endDateTime, setEndDateTime] = useState("");
-  const [clientName, setClientName] = useState("");
-  const [extraInfo, setExtraInfo] = useState("");
+  const INITIAL_FIELDS = {
+    kind: "household",
+    startDateTime: "",
+    endDateTime: "",
+    clientName: "",
+    extraInfo: "",
+  };
+  const [fields, setFields] = useState(INITIAL_FIELDS);
+  const handleChange = (event) => {
+    setFields({
+      ...fields,
+      [event.target.name]: event.target.value,
+    });
+  };
   const [status, setStatus] = useState("");
-  const handleChangeKind = (event) => {
-    setKind(event.target.value);
-  };
-  const handleChangeStartDateTime = (event) => {
-    setStartDateTime(event.target.value);
-  };
-  const handleChangeEndDateTime = (event) => {
-    setEndDateTime(event.target.value);
-  };
-  const handleChangeClientName = (event) => {
-    setClientName(event.target.value);
-  };
-  const handleChangeExtraInfo = (event) => {
-    setExtraInfo(event.target.value);
-  };
   const handleCreate = async () => {
     // Should validate input
     // ...
 
     // Post the request
-    const careRequest = {
-      kind,
-      startDateTime,
-      endDateTime,
-      clientName,
-      extraInfo,
-    };
     const data = await fetch(`/api/new`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(careRequest),
+      body: JSON.stringify(fields),
     });
     const json = await data.json();
     console.log("json:", json);
 
     // Clean up all input
-    setKind("household");
-    Array.from(document.querySelectorAll("input")).forEach(
-      (input) => (input.value = "")
-    );
-    Array.from(document.querySelectorAll("textarea")).forEach(
-      (input) => (input.value = "")
-    );
+    setFields(INITIAL_FIELDS);
 
     // Show success message
     setStatus("Request posted successfully!");
@@ -64,9 +45,9 @@ const New = () => {
         <select
           className="select-narrow"
           name={"kind"}
-          id={kind}
-          value={kind}
-          onChange={handleChangeKind}
+          id="kind"
+          value={fields.kind}
+          onChange={handleChange}
         >
           <option value="household">Household</option>
           <option value="medical">Medical</option>
@@ -79,8 +60,8 @@ const New = () => {
           type="text"
           id="startDateTime"
           name="startDateTime"
-          value={startDateTime}
-          onChange={handleChangeStartDateTime}
+          value={fields.startDateTime}
+          onChange={handleChange}
         />
 
         <label>End date and time: </label>
@@ -88,8 +69,8 @@ const New = () => {
           type="text"
           id="endDateTime"
           name="endDateTime"
-          value={endDateTime}
-          onChange={handleChangeEndDateTime}
+          value={fields.endDateTime}
+          onChange={handleChange}
         />
 
         <label>Client name: </label>
@@ -97,8 +78,8 @@ const New = () => {
           type="text"
           id="clientName"
           name="clientName"
-          value={clientName}
-          onChange={handleChangeClientName}
+          value={fields.clientName}
+          onChange={handleChange}
         />
 
         <label>Extra information: </label>
@@ -106,8 +87,8 @@ const New = () => {
           type="extraInfo"
           id="extraInfo"
           name="extraInfo"
-          value={extraInfo}
-          onChange={handleChangeExtraInfo}
+          value={fields.extraInfo}
+          onChange={handleChange}
         />
       </form>
 
