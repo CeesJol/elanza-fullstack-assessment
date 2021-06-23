@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Request = () => {
-  const [request, setRequest] = useState({});
+  const [careRequest, setCareRequest] = useState({});
   const { id } = useParams(); // TODO i hope this is defined before the useEffect call...
   const fetchRequest = async () => {
     // Fetch all request details using the ID
     const response = await fetch(`/api/request/${id}`);
     const result = await response.json();
-    setRequest(result.request);
+    setCareRequest(result.careRequest);
   };
   useEffect(() => {
-    // Request open requests on load
+    // Request open care requests on load
     fetchRequest();
   }, []);
-  if (!request || !request.clientName) {
+  if (!careRequest || !careRequest.clientName) {
     // Loading
     return <div>Loading...</div>;
   }
-  return <div>hello world</div>;
+  return (
+    <div>
+      <h2>Request details</h2>
+      <p>Client name: {careRequest.clientName}</p>
+    </div>
+  );
 };
 
 export default Request;

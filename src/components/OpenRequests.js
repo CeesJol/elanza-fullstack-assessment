@@ -2,24 +2,24 @@ import React, { useEffect, useState } from "react";
 import RequestPreview from "./RequestPreview";
 
 const OpenRequests = () => {
-  const [requests, setRequests] = useState([]);
+  const [careRequests, setCareRequests] = useState([]);
   const fetchRequests = async () => {
     const response = await fetch("/api/open-requests");
     const result = await response.json();
-    setRequests(result.requests);
+    setCareRequests(result.careRequests);
   };
   useEffect(() => {
-    // Request open requests on load
+    // Request open careRequests on load
     fetchRequests();
   });
   return (
     <div>
-      <h2>Overview of Open Requests</h2>
-      {requests.length === 0 ? (
-        <p>There are no requests.</p>
+      <h2>Overview of Open Care Requests</h2>
+      {careRequests.length === 0 ? (
+        <p>There are no care requests.</p>
       ) : (
-        requests.map((request) => (
-          <RequestPreview key={request.id} request={request} />
+        careRequests.map((careReq) => (
+          <RequestPreview key={careReq.id} careRequest={careReq} />
         ))
       )}
     </div>

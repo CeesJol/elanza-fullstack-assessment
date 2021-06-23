@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const RequestPreview = ({ request }) => {
+const RequestPreview = ({ careRequest }) => {
   return (
     <div>
-      <Link to={`/requests/${request.id}`}>
-        <h3>{request.clientName}</h3>
+      <Link to={`/requests/${careRequest.id}`}>
+        <h3>{careRequest.clientName}</h3>
       </Link>
     </div>
   );
