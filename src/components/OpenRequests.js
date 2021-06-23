@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import RequestPreview from "./RequestPreview";
 
 const OpenRequests = () => {
   const [requests, setRequests] = useState([]);
@@ -14,9 +15,11 @@ const OpenRequests = () => {
   return (
     <div>
       <h2>Overview of Open Requests</h2>
-      {requests.map((request) => (
-        <p>{request.clientName}</p>
-      ))}
+      {requests.length === 0 ? (
+        <p>There are no requests.</p>
+      ) : (
+        requests.map((request) => <RequestPreview request={request} />)
+      )}
     </div>
   );
 };

@@ -19,6 +19,9 @@ const New = () => {
     });
     const json = await data.json();
     console.log("json:", json);
+
+    // If success, clean up (clear form etc.)
+    // ...
   };
   return (
     <div>
