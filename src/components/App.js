@@ -5,7 +5,6 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./Home";
 import New from "./New";
-import OpenRequests from "./OpenRequests";
 import Request from "./Request";
 
 export default function App() {
@@ -19,9 +18,6 @@ export default function App() {
           <li>
             <Link to="/new">New</Link>
           </li>
-          <li>
-            <Link to="/open-requests">Open Requests</Link>
-          </li>
         </ul>
 
         <hr />
@@ -32,9 +28,6 @@ export default function App() {
           </Route>
           <Route path="/new">
             <New />
-          </Route>
-          <Route path="/open-requests">
-            <OpenRequests />
           </Route>
           <Route path="/requests/:id" component={Request} />
         </Switch>

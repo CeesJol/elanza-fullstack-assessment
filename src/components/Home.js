@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import RequestPreview from "./RequestPreview";
 
-const Home = () => {
+const OpenRequests = () => {
+  const [careRequests, setCareRequests] = useState([]);
+  const [status, setStatus] = useState("Loading care requests...");
+  const fetchRequests = async () => {
+    try {
+      const response = await fetch("/api/open-requests");
+      const result = await response.json();
+      setCareRequests(result.careRequests);
+
+      if (result.careRequests.length > 0) {
+        setStatus("");
+      } else {
+        setStatus("There are no care requests yet.");
+      }
+    } catch (e) {
+      setStatus("Something went wrong loading the care requests.");
+      console.error(e);
+    }
+  };
+  useEffect(() => {
+    // Request open careRequests on load
+    fetchRequests();
+  }, []);
   return (
     <div>
-      <h2>Healthcare Marketplace</h2>
-      <p>Use the navigation above to get started.</p>
+      <h2>Overview of Open Care Requests</h2>
+      {status}
+      {careRequests.map((careReq) => (
+        <RequestPreview key={careReq.id} careRequest={careReq} />
+      ))}
     </div>
   );
 };
 
-export default Home;
+export default OpenRequests;
