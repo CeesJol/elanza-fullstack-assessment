@@ -2,10 +2,18 @@ import React, { useState } from "react";
 
 const New = () => {
   const [kind, setKind] = useState("household");
+  const [startDateTime, setStartDateTime] = useState("");
+  const [endDateTime, setEndDateTime] = useState("");
   const [clientName, setClientName] = useState("");
   const [extraInfo, setExtraInfo] = useState("");
   const handleChangeKind = (event) => {
     setKind(event.target.value);
+  };
+  const handleChangeStartDateTime = (event) => {
+    setStartDateTime(event.target.value);
+  };
+  const handleChangeEndDateTime = (event) => {
+    setEndDateTime(event.target.value);
   };
   const handleChangeClientName = (event) => {
     setClientName(event.target.value);
@@ -18,12 +26,19 @@ const New = () => {
     // ...
 
     // Post the request
+    const careRequest = {
+      kind,
+      startDateTime,
+      endDateTime,
+      clientName,
+      extraInfo,
+    };
     const data = await fetch(`/api/new`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ kind, clientName, extraInfo }),
+      body: JSON.stringify(careRequest),
     });
     const json = await data.json();
     console.log("json:", json);
@@ -46,6 +61,26 @@ const New = () => {
           <option value="household">Household</option>
           <option value="medical">Medical</option>
         </select>
+
+        {/* Would be better to use an NPM module for this, but
+				wanted to keep it simple due to time constraints*/}
+        <label>Start date and time: </label>
+        <input
+          type="text"
+          id="startDateTime"
+          name="startDateTime"
+          value={startDateTime}
+          onChange={handleChangeStartDateTime}
+        />
+
+        <label>End date and time: </label>
+        <input
+          type="text"
+          id="endDateTime"
+          name="endDateTime"
+          value={endDateTime}
+          onChange={handleChangeEndDateTime}
+        />
 
         <label>Client name: </label>
         <input
