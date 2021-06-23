@@ -21,7 +21,26 @@ const Request = () => {
   return (
     <div>
       <h2>Request details</h2>
-      <p>Client name: {careRequest.clientName}</p>
+      <p>
+        Kind of care needed:
+        <br /> <b>{careRequest.kind}</b>
+      </p>
+      <p>
+        Start date and time: <br />
+        <b>{careRequest.startDateTime}</b>
+      </p>
+      <p>
+        End date and time: <br />
+        <b>{careRequest.endDateTime}</b>
+      </p>
+      <p>
+        Client name: <br />
+        <b>{careRequest.clientName}</b>
+      </p>
+      <p>
+        Status: <br />
+        <b>{careRequest.status}</b>
+      </p>
     </div>
   );
 };

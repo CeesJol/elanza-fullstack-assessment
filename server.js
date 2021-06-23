@@ -40,6 +40,10 @@ const careRequests = [
     clientName: "John SOme",
     status: "OPEN",
     id: "test-id",
+    kind: "medical",
+    startDateTime: "oho",
+    endDateTime: "ioj",
+    extraInfo: "ij",
   },
 ];
 
