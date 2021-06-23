@@ -4,6 +4,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import New from "./New";
+import OpenRequests from "./OpenRequests";
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -25,6 +26,9 @@ export default function BasicExample() {
           <li>
             <Link to="/new">New</Link>
           </li>
+          <li>
+            <Link to="/open-requests">Open Requests</Link>
+          </li>
         </ul>
 
         <hr />
@@ -43,8 +47,8 @@ export default function BasicExample() {
           <Route path="/new">
             <New />
           </Route>
-          <Route path="/dashboard">
-            <Dashboard />
+          <Route path="/open-requests">
+            <OpenRequests />
           </Route>
         </Switch>
       </div>
@@ -59,14 +63,6 @@ function Home() {
   return (
     <div>
       <h2>Home</h2>
-    </div>
-  );
-}
-
-function Dashboard() {
-  return (
-    <div>
-      <h2>Dashboard</h2>
     </div>
   );
 }
