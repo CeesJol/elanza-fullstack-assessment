@@ -9,16 +9,16 @@ app.use(bodyParser.json());
 
 const { guid } = require("./util");
 
-// TODO remove default request... that's just temporary
+// One example care request
 let careRequests = [
   {
-    clientName: "John SOme",
+    clientName: "Ada Lovelace",
     status: "OPEN",
     id: "test-id",
     kind: "medical",
-    startDateTime: "oho",
-    endDateTime: "ioj",
-    extraInfo: "ij",
+    startDateTime: "24/06/2021 15:00",
+    endDateTime: "24/06/2021 16:00",
+    extraInfo: "",
   },
 ];
 
@@ -53,8 +53,10 @@ app.get("/api/request/:id", function (req, res) {
   )[0];
   console.log("careRequest:", careRequest);
 
-  // TODO handle empty careRequest (careRequest not found)
-  // ...
+  // Handle empty careRequest (careRequest with this id does not exist)
+  if (!careRequest) {
+    throw new Error("Cannot find careRequest with id", req.params.id);
+  }
 
   return res.json({ careRequest });
 });
@@ -75,8 +77,8 @@ app.post("/api/new", (req, res) => {
   // Store careRequest
   careRequests.push(careRequest);
 
-  // Return ok (probably a better way to do this ...)
-  return res.json({ ok: "ok" });
+  // Return ok
+  res.sendStatus(200);
 });
 
 /**
@@ -98,11 +100,8 @@ app.get("/api/apply/:id", (req, res) => {
     return careReq;
   });
 
-  // TODO handle empty careRequest (careRequest not found)
-  // ...
-
-  // Return ok (probably a better way to do this ...)
-  return res.json({ ok: "ok" });
+  // Return ok
+  res.sendStatus(200);
 });
 
 app.listen(process.env.PORT || 8080);

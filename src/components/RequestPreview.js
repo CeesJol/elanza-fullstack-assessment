@@ -8,7 +8,7 @@ const RequestPreview = ({ careRequest }) => {
       <p>Start date and time: {careRequest.startDateTime}</p>
       <p>End date and time: {careRequest.endDateTime}</p>
 
-      <Link to={`/requests/${careRequest.id}`}>View details and apply</Link>
+      <Link to={`/requests/${careRequest.id}`}>View details or apply</Link>
     </div>
   );
 };

@@ -12,11 +12,16 @@ code {
     monospace;
 }
 
+/* Form components */
 label, button {
 	display: block;
 	margin-top: 1rem;
 }
+input, textarea {
+	width: 20rem;
+}
 
+/* Request preview */
 .request-preview {
 	border: 1px solid grey;
 	border-radius: .5rem;

@@ -6,6 +6,7 @@ const OpenRequests = () => {
   const [status, setStatus] = useState("Loading care requests...");
   const fetchRequests = async () => {
     try {
+      // Fetch care requests
       const response = await fetch("/api/open-requests");
       const result = await response.json();
       setCareRequests(result.careRequests);
@@ -21,7 +22,7 @@ const OpenRequests = () => {
     }
   };
   useEffect(() => {
-    // Request open careRequests on load
+    // Request open care requests on load
     fetchRequests();
   }, []);
   return (

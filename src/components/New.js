@@ -17,20 +17,20 @@ const New = () => {
   };
   const [status, setStatus] = useState("");
   const handleCreate = async () => {
-    // Should validate input
-    // ...
+    // Validate input
+    if (!fields.startDateTime || !fields.endDateTime || !fields.clientName) {
+      return setStatus("Please fill in all required fields.");
+    }
 
-    // Post the request
     try {
-      const data = await fetch(`/api/new`, {
+      // Post the request data
+      await fetch(`/api/new`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(fields),
       });
-      const json = await data.json();
-      console.log("json:", json);
 
       // Clean up all input
       setFields(INITIAL_FIELDS);
@@ -58,8 +58,9 @@ const New = () => {
           <option value="medical">Medical</option>
         </select>
 
-        {/* Would be better to use an NPM module for this, but
-				wanted to keep it simple due to time constraints*/}
+        {/* Would be better to use an NPM module and create a 
+				date and time picker, but wanted to keep it simple due 
+				to time constraints */}
         <label>Start date and time: </label>
         <input
           type="text"
@@ -87,7 +88,7 @@ const New = () => {
           onChange={handleChange}
         />
 
-        <label>Extra information: </label>
+        <label>Extra information (optional): </label>
         <textarea
           type="extraInfo"
           id="extraInfo"
