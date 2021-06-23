@@ -63,6 +63,10 @@ const Request = () => {
           <b>{careRequest.clientName}</b>
         </p>
         <p>
+          Extra information: <br />
+          <b>{careRequest.extraInfo}</b>
+        </p>
+        <p>
           Status: <br />
           <b>{careRequest.status}</b>
         </p>
@@ -74,8 +78,10 @@ const Request = () => {
         <h2>Apply</h2>
         {applyStatus === "" && careRequest.status === "OPEN" && (
           <form>
-            <label>You can apply to this request using this button.</label>
-            <button onClick={handleApply}>Apply</button>
+            <label>Click the button below to apply to this request.</label>
+            <button type="button" onClick={handleApply}>
+              Apply
+            </button>
           </form>
         )}
         {applyStatus}

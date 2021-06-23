@@ -15,10 +15,11 @@ let careRequests = [
     clientName: "Ada Lovelace",
     status: "OPEN",
     id: "test-id",
-    kind: "medical",
+    kind: "Medical",
     startDateTime: "24/06/2021 15:00",
     endDateTime: "24/06/2021 16:00",
-    extraInfo: "",
+    extraInfo:
+      "This is an example entry. Lorem ipsum dolor sit amet, consectetur adip id liber tempor inc.",
   },
 ];
 

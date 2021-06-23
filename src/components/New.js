@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const New = () => {
   const INITIAL_FIELDS = {
-    kind: "household",
+    kind: "Household",
     startDateTime: "",
     endDateTime: "",
     clientName: "",
@@ -54,8 +54,8 @@ const New = () => {
           value={fields.kind}
           onChange={handleChange}
         >
-          <option value="household">Household</option>
-          <option value="medical">Medical</option>
+          <option value="Household">Household</option>
+          <option value="Medical">Medical</option>
         </select>
 
         {/* Would be better to use an NPM module and create a 
