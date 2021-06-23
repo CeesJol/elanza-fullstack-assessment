@@ -16,3 +16,17 @@ label, button {
 	display: block;
 	margin-top: 1rem;
 }
+
+.request-preview {
+	border: 1px solid grey;
+	border-radius: .5rem;
+	margin: 1rem;
+	padding: 1rem;
+}
+.request-preview > a {
+	text-decoration: none;
+	color: blue;
+}
+.request-preview > a:hover {
+	text-decoration: underline;
+}

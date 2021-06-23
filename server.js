@@ -34,10 +34,8 @@ app.get("/api/open-requests", function (req, res) {
   let result = careRequests.filter((careReq) => careReq.status === "OPEN");
   // Return only relevant information to draw a preview for each care request.
   result = result.map((careReq) => {
-    const { clientName, id } = careReq;
-    console.log("clientName:", clientName);
-
-    return { clientName, id };
+    const { clientName, startDateTime, endDateTime, id } = careReq;
+    return { clientName, startDateTime, endDateTime, id };
   });
   return res.json({
     careRequests: result,
