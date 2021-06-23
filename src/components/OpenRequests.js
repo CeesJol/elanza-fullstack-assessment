@@ -3,10 +3,22 @@ import RequestPreview from "./RequestPreview";
 
 const OpenRequests = () => {
   const [careRequests, setCareRequests] = useState([]);
+  const [status, setStatus] = useState("Loading care requests...");
   const fetchRequests = async () => {
-    const response = await fetch("/api/open-requests");
-    const result = await response.json();
-    setCareRequests(result.careRequests);
+    try {
+      const response = await fetch("/api/open-requests");
+      const result = await response.json();
+      setCareRequests(result.careRequests);
+
+      if (result.careRequests.length > 0) {
+        setStatus("");
+      } else {
+        setStatus("There are no care requests yet.");
+      }
+    } catch (e) {
+      setStatus("Something went wrong loading the care requests.");
+      console.error(e);
+    }
   };
   useEffect(() => {
     // Request open careRequests on load
@@ -15,13 +27,10 @@ const OpenRequests = () => {
   return (
     <div>
       <h2>Overview of Open Care Requests</h2>
-      {careRequests.length === 0 ? (
-        <p>There are no care requests.</p>
-      ) : (
-        careRequests.map((careReq) => (
-          <RequestPreview key={careReq.id} careRequest={careReq} />
-        ))
-      )}
+      {status}
+      {careRequests.map((careReq) => (
+        <RequestPreview key={careReq.id} careRequest={careReq} />
+      ))}
     </div>
   );
 };

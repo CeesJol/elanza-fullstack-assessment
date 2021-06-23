@@ -21,21 +21,26 @@ const New = () => {
     // ...
 
     // Post the request
-    const data = await fetch(`/api/new`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(fields),
-    });
-    const json = await data.json();
-    console.log("json:", json);
+    try {
+      const data = await fetch(`/api/new`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(fields),
+      });
+      const json = await data.json();
+      console.log("json:", json);
 
-    // Clean up all input
-    setFields(INITIAL_FIELDS);
+      // Clean up all input
+      setFields(INITIAL_FIELDS);
 
-    // Show success message
-    setStatus("Request posted successfully!");
+      // Show success message
+      setStatus("Request posted successfully!");
+    } catch (e) {
+      setStatus("Something went wrong posting the request.");
+      console.error(e);
+    }
   };
   return (
     <div>
