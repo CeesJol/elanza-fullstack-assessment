@@ -18,7 +18,9 @@ const OpenRequests = () => {
       {requests.length === 0 ? (
         <p>There are no requests.</p>
       ) : (
-        requests.map((request) => <RequestPreview request={request} />)
+        requests.map((request) => (
+          <RequestPreview key={request.id} request={request} />
+        ))
       )}
     </div>
   );

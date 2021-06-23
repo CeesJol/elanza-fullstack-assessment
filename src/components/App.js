@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./Home";
 import New from "./New";
 import OpenRequests from "./OpenRequests";
+import Request from "./Request";
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="/open-requests">
             <OpenRequests />
           </Route>
+          <Route path="/requests/:id" component={Request} />
         </Switch>
       </div>
     </Router>
