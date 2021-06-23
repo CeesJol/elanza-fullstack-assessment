@@ -42,7 +42,7 @@ const requests = [
   {
     clientName: "John SOme",
     status: "OPEN",
-    id: guid(),
+    id: "test-id",
   },
 ];
 
@@ -57,7 +57,21 @@ app.get("/api/data", function (req, res) {
  */
 app.get("/api/open-requests", function (req, res) {
   // TODO: filter requests: return the 'open' ones only (simple property)
+  // TODO dont return all details, just some important things for the overview page
   return res.json({ requests });
+});
+
+/**
+ * Return details of a request
+ * Type: GET
+ */
+app.get("/api/request/:id", function (req, res) {
+  // TODO: filter requests: return the 'open' ones only (simple property)
+  // TODO dont return all details, just some important things for the overview page
+  const request = requests.filter((re) => re.id === req.params.id)[0];
+  console.log("request:", request);
+  // TODO handle empty request (request not found)
+  return res.json({ request });
 });
 
 /**
